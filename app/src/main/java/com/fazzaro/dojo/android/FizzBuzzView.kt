@@ -10,11 +10,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fazzaro.dojo.android.ui.models.FizzBuzzViewModel
 import com.fazzaro.dojo.android.ui.theme.DojoTheme
 
-
 class FizzBuzzView() {
 
     @Composable
-    fun Render(model: FizzBuzzViewModel = viewModel()) {
+    fun Render() { //model: FizzBuzzViewModel = viewModel()) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -24,9 +23,9 @@ class FizzBuzzView() {
             Text("Let's play Fizz Buzz!")
             Spacer(modifier = Modifier.size(20.dp))
             OutlinedTextField(
-                value = model.result ?: "",
+                value = "",
                 label = { Text("Enter a number") },
-                onValueChange = { model.setInput(it) },
+                onValueChange = { },
                 modifier = Modifier.fillMaxWidth()
             )
             Text("(No result)")
