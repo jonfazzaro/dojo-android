@@ -15,7 +15,7 @@ import com.fazzaro.dojo.android.ui.theme.DojoTheme
 class FizzBuzzView() {
 
     @Composable
-    fun Render() { //model: FizzBuzzViewModel = viewModel()) {
+    fun Render(model: FizzBuzzViewModel = viewModel()) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -25,15 +25,15 @@ class FizzBuzzView() {
             Text("Let's play Fizz Buzz!")
             Spacer(modifier = Modifier.size(20.dp))
             OutlinedTextField(
-                value = "",
+                value = model.input?.toString() ?: "",
                 label = { Text("Enter a number") },
-                onValueChange = { },
+                onValueChange = { model.setInput(it) },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
             Text( "(No result)", )
             Spacer(modifier = Modifier.size(20.dp))
-            Button(enabled = false, onClick = {}) {
+            Button(enabled = model.isPlayEnabled, onClick = {}) {
                 Text(text = "Play")
             }
         }
