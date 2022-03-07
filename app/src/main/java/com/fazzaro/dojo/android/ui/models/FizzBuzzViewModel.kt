@@ -1,4 +1,6 @@
 package com.fazzaro.dojo.android.ui.models
 
-class FizzBuzzViewModel() {
+import androidx.lifecycle.ViewModel
+
+class FizzBuzzViewModel: ViewModel() {
 }
