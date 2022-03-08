@@ -65,6 +65,7 @@ class FizzBuzzViewModelTest {
         subject.play()
 
         verify { fizzbuzz.play(5) }
+        assertEquals("Fuck yeah!", subject.result)
     }
 
     @Test

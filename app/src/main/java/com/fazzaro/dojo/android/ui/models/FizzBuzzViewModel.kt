@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.fazzaro.dojo.android.kata.FizzBuzz
 
-class FizzBuzzViewModel(val fizzbuzz: FizzBuzz = FizzBuzz()) : ViewModel() {
+class FizzBuzzViewModel(private val fizzbuzz: FizzBuzz = FizzBuzz()) : ViewModel() {
 
     var isPlayEnabled = false
 
@@ -23,6 +23,6 @@ class FizzBuzzViewModel(val fizzbuzz: FizzBuzz = FizzBuzz()) : ViewModel() {
     }
 
     fun play() {
-        input?.let { this.fizzbuzz.play(it) }
+        input?.let { result = fizzbuzz.play(it) }
     }
 }
