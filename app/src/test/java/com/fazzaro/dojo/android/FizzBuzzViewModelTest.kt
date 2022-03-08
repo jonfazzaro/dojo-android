@@ -14,11 +14,14 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
 class FizzBuzzViewModelTest {
+    private lateinit var fizzbuzz: FizzBuzz
     lateinit var subject: FizzBuzzViewModel
 
     @BeforeEach
     fun arrange() {
-        subject = FizzBuzzViewModel()
+        fizzbuzz = mockk<FizzBuzz>()
+        every { fizzbuzz.play(5) } returns "Fuck yeah!"
+        subject = FizzBuzzViewModel(fizzbuzz)
     }
 
     @Test
@@ -58,10 +61,6 @@ class FizzBuzzViewModelTest {
 
     @Test
     fun `when playing calls the FizzBuzz logic`() {
-        val fizzbuzz = mockk<FizzBuzz>()
-        every { fizzbuzz.play(5) } returns "Fuck yeah!"
-        subject = FizzBuzzViewModel(fizzbuzz)
-
         subject.setInput("5")
         subject.play()
 
@@ -69,15 +68,11 @@ class FizzBuzzViewModelTest {
     }
 
     @Test
-    fun `when playing calls the FizzBuzz logic x`() {
-        val fizzbuzz = mockk<FizzBuzz>()
-        every { fizzbuzz.play(5) } returns "Fuck yeah!"
-        subject = FizzBuzzViewModel(fizzbuzz)
-
+    fun `with invalid input it does not play FizzBuzz`() {
         subject.setInput("byteme!")
         subject.play()
 
-        verify { fizzbuzz  wasNot Called }
+        verify { fizzbuzz wasNot Called }
     }
 
     private fun arrangeValidInput() {
