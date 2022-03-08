@@ -8,13 +8,15 @@ import com.fazzaro.dojo.android.kata.FizzBuzz
 
 class FizzBuzzViewModel(private val fizzbuzz: FizzBuzz = FizzBuzz()) : ViewModel() {
 
-    var isPlayEnabled = false
+    var isPlayEnabled: Boolean by mutableStateOf(false)
+        private set
 
     // TODO how to test drive this???
     var input: Int? by mutableStateOf(null)
         private set
 
-    var result: String? = null
+    var result: String? by mutableStateOf(null)
+        private set
 
     fun setInput(inputValue: String) {
         inputValue.ifEmpty { return }

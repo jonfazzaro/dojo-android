@@ -31,9 +31,9 @@ class FizzBuzzView() {
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
-            Text( "(No result)", )
+            Text( model.result ?: "I got nuthin for ya", )
             Spacer(modifier = Modifier.size(20.dp))
-            Button(enabled = model.isPlayEnabled, onClick = {}) {
+            Button(enabled = model.isPlayEnabled, onClick = { model.play() }) {
                 Text(text = "Play")
             }
         }
