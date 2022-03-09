@@ -20,7 +20,7 @@ class FizzBuzzViewModelTest {
     @BeforeEach
     fun arrange() {
         fizzbuzz = mockk<FizzBuzz>()
-        every { fizzbuzz.play(5) } returns "Fuck yeah!"
+        every { fizzbuzz.play(5) } returns "Buzz"
         subject = FizzBuzzViewModel(fizzbuzz)
     }
 
@@ -45,6 +45,8 @@ class FizzBuzzViewModelTest {
 
     @Test
     fun `given a blank string has a null input`() {
+        arrangeValidInput()
+
         subject.setInput("")
 
         assertNull(subject.input)
@@ -65,7 +67,9 @@ class FizzBuzzViewModelTest {
         subject.play()
 
         verify { fizzbuzz.play(5) }
-        assertEquals("Fuck yeah!", subject.result)
+        assertEquals("The FizzBuzz of 5 is Buzz", subject.result)
+        assertNull(subject.input)
+        assertFalse(subject.isPlayEnabled)
     }
 
     @Test

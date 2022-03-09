@@ -19,12 +19,15 @@ class FizzBuzzViewModel(private val fizzbuzz: FizzBuzz = FizzBuzz()) : ViewModel
         private set
 
     fun setInput(inputValue: String) {
-        inputValue.ifEmpty { return }
         input = inputValue.toIntOrNull()
         isPlayEnabled = input != null
     }
 
     fun play() {
-        input?.let { result = fizzbuzz.play(it) }
+        input?.let {
+            result = "The FizzBuzz of $it is ${fizzbuzz.play(it)}"
+            input = null
+            isPlayEnabled = false
+        }
     }
 }
