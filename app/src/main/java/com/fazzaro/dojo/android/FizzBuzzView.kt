@@ -11,11 +11,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fazzaro.dojo.android.ui.models.FizzBuzzViewModel
 import com.fazzaro.dojo.android.ui.theme.DojoTheme
+import kotlinx.coroutines.launch
 
 class FizzBuzzView() {
 
     @Composable
     fun Render(model: FizzBuzzViewModel = viewModel()) {
+        val coroutineScope = rememberCoroutineScope()
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -31,11 +34,14 @@ class FizzBuzzView() {
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
-            model.result?.let { Text( it ) }
+            model.result?.let { Text(it) }
             Spacer(modifier = Modifier.size(20.dp))
-            Button(enabled = model.isPlayEnabled, onClick = { model.play() }) {
-                Text(text = "Play")
-            }
+            Button(enabled = model.isPlayEnabled, onClick = {
+                coroutineScope.launch {
+                    model.play()
+                }
+            })
+                { Text(text = "Play") }
         }
     }
 

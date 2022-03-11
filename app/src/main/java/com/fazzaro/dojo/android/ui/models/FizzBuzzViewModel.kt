@@ -27,13 +27,11 @@ class FizzBuzzViewModel(private val fizzbuzz: FizzBuzz = FizzBuzz()) : ViewModel
         isPlayEnabled = input != null
     }
 
-    fun play() {
-        viewModelScope.async {
-            input?.let {
-                result = "The FizzBuzz of $it is ${fizzbuzz.play(it)}"
-                input = null
-                isPlayEnabled = false
-            }
+    suspend fun play() {
+        input?.let {
+            result = "The FizzBuzz of $it is ${fizzbuzz.play(it)}"
+            input = null
+            isPlayEnabled = false
         }
     }
 }
