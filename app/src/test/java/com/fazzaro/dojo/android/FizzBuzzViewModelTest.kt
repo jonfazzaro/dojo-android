@@ -3,10 +3,7 @@ package com.fazzaro.dojo.android
 import androidx.lifecycle.ViewModel
 import com.fazzaro.dojo.android.kata.FizzBuzz
 import com.fazzaro.dojo.android.ui.models.FizzBuzzViewModel
-import io.mockk.Called
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
+import io.mockk.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -20,7 +17,7 @@ class FizzBuzzViewModelTest {
     @BeforeEach
     fun arrange() {
         fizzbuzz = mockk<FizzBuzz>()
-        every { fizzbuzz.play(5) } returns "Buzz"
+        coEvery { fizzbuzz.play(5) } returns "Buzz"
         subject = FizzBuzzViewModel(fizzbuzz)
     }
 
@@ -66,7 +63,7 @@ class FizzBuzzViewModelTest {
         subject.setInput("5")
         subject.play()
 
-        verify { fizzbuzz.play(5) }
+        coVerify { fizzbuzz.play(5) }
         assertEquals("The FizzBuzz of 5 is Buzz", subject.result)
         assertNull(subject.input)
         assertFalse(subject.isPlayEnabled)
